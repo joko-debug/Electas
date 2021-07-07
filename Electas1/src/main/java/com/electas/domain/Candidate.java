@@ -1,6 +1,6 @@
 package com.electas.domain;
 
-import java.sql.Date;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,14 +10,12 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Candidate {
-	//table contabing all the elections only editable by election admin.
+	//table containing all the elections only editable by election administrators.
 	
 	private Long id;
-	private User admin;
-	private String description;
-	private Integer winnerCount;
-	private Date startDate;
-	private Date endDate;
+	private User user;
+	private Election election;
+	private Boolean aproved;
 	
 	
 	@Id 
@@ -29,37 +27,35 @@ public class Candidate {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	@ManyToOne()
-	public User getAdmin() {
-		return admin;
+	@ManyToOne
+	public User getUser() {
+		return user;
 	}
-	public void setAdmin(User admin) {
-		this.admin = admin;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public String getDescription() {
-		return description;
+
+	@ManyToOne
+	public Election getElection() {
+		return election;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+
+	public void setElection(Election election) {
+		this.election = election;
 	}
-	public Integer getWinnerCount() {
-		return winnerCount;
+
+	public Boolean getAproved() {
+		return aproved;
 	}
-	public void setWinnerCount(Integer winnerCount) {
-		this.winnerCount = winnerCount;
+
+	public void setAproved(Boolean aproved) {
+		this.aproved = aproved;
 	}
-	public Date getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-	public Date getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+
+	@Override
+	public String toString() {
+		return "Candidate [id=" + id + ", user=" + user + ", election=" + election + ", aproved=" + aproved + "]";
 	}
 	
 	
