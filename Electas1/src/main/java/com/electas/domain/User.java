@@ -32,6 +32,8 @@ public class User {
 	  private Set<Candidate> candidates = new HashSet<>();
 	  private Set<Election> elections = new HashSet<>();
 	  private Set<Ballot> ballots = new HashSet<>();
+	  private Set<Sment> sments = new HashSet<>();
+	  private Set<UpDown> updown = new HashSet<>();
 	  
 	  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
@@ -99,7 +101,7 @@ public class User {
 		this.candidates = candidates;
 	}
 	
-	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY, mappedBy="user")
+	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY, mappedBy="admin")
 	public Set<Election> getElections() {
 		return elections;
 	}
@@ -120,6 +122,32 @@ public class User {
 				+ ", lastName=" + lastName + ", email=" + email + ", description=" + description + ", idNumber="
 				+ idNumber + ", authorities=" + authorities + ", candidates=" + candidates + ", elections=" + elections
 				+ ", ballots=" + ballots + "]";
+	}
+	/**
+	 * @return the sments
+	 */
+	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY, mappedBy="user")
+	public Set<Sment> getSments() {
+		return sments;
+	}
+	/**
+	 * @param sments the sments to set
+	 */
+	public void setSments(Set<Sment> sments) {
+		this.sments = sments;
+	}
+	/**
+	 * @return the updown
+	 */
+	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY, mappedBy="user")
+	public Set<UpDown> getUpdown() {
+		return updown;
+	}
+	/**
+	 * @param updown the updown to set
+	 */
+	public void setUpdown(Set<UpDown> updown) {
+		this.updown = updown;
 	}
 	  
 	  

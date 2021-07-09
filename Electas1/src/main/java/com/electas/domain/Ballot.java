@@ -1,10 +1,16 @@
 package com.electas.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Ballot {
@@ -19,6 +25,7 @@ public class Ballot {
 	private User user;
 	private boolean aproved;
 	private double  waight;
+	private Set<Vote> votes = new HashSet<>();
 	
 	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
@@ -58,6 +65,14 @@ public class Ballot {
 	}
 	public void setAproved(boolean aproved) {
 		this.aproved = aproved;
+	}
+	
+	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY, mappedBy="ballot")
+	public Set<Vote> getVotes() {
+		return votes;
+	}
+	public void setVotes(Set<Vote> votes) {
+		this.votes = votes;
 	}
 	
 	

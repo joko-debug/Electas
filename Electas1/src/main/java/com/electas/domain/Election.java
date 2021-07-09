@@ -1,12 +1,17 @@
 package com.electas.domain;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Election {
@@ -19,6 +24,7 @@ public class Election {
 	private Integer winnerCount;
 	private Date startDate;
 	private Date endDate;
+	private Set<Sment> sment = new HashSet<>();
 	
 	
 	@Id 
@@ -73,6 +79,21 @@ public class Election {
 	public String toString() {
 		return "Election [id=" + id + ", admin=" + admin + ", description=" + description + ", winnerCount="
 				+ winnerCount + ", startDate=" + startDate + ", endDate=" + endDate + "]";
+	}
+
+	/**
+	 * @return the sment
+	 */
+	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY, mappedBy="election")
+	public Set<Sment> getSment() {
+		return sment;
+	}
+
+	/**
+	 * @param sment the sment to set
+	 */
+	public void setSment(Set<Sment> sment) {
+		this.sment = sment;
 	}
 	
 	
