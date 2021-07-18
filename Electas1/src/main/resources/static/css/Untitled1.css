@@ -37,9 +37,12 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box; }
+  box-sizing: content-box; }
 
 html {
+	padding: 0;
+	 margin: 0;
+	height:100vh;
   font-family: sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
@@ -47,8 +50,11 @@ html {
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block; }
+  
+
 
 body {
+	height:100vh;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 1rem;

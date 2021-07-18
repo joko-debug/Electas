@@ -42,6 +42,12 @@ public class CustomSecurityUser extends User implements UserDetails {
 	    return super.getUsername();
 	  }
 	  
+	  @Override
+	public String getEmail() {
+		return super.getEmail();
+	}
+	  
+	  
 
 	  @Override
 	  public boolean isAccountNonExpired() {
