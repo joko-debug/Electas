@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.electas.domain.Authority;
 import com.electas.domain.User;
 import com.electas.repositories.UserRepository;
+import com.electas.sercurity.Authority;
 
 
 @Service

@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 
 
 import com.electas.custom_anotations.IdFormat;
+import com.electas.sercurity.Authority;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -29,7 +30,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class User {
 
 	private Long id;
-	private String username;
 	@NotEmpty(message = "please enter password")
 	private String password;
 	@NotEmpty(message = "please enter firstName")
@@ -39,7 +39,7 @@ public class User {
 	
 	@NotEmpty
 	@Email(message = "invalid email adress")
-	private String email;
+	private String username;//is a email adress
 	private String inAs;//to specify what type user they are currently in as;
 	private String description;
 	
@@ -96,14 +96,6 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -120,7 +112,7 @@ public class User {
 		this.idNumber = idNumber;
 	}
 
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "user")
 	public Set<Authority> getAuthorities() {
 		return authorities;
 	}
@@ -156,14 +148,7 @@ public class User {
 		this.ballots = ballots;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", description=" + description + ", idNumber="
-				+ idNumber + ", authorities=" + authorities + ", candidates=" + candidates + ", elections=" + elections
-				+ ", ballots=" + ballots + "]";
-	}
-
+	
 	/**
 	 * @return the sments
 	 */

@@ -34,7 +34,6 @@ public class LandingController {
 		 }
 		user.setInAs("Voter"); 
 	    User saved = userService.save(user);
-	    System.out.println(saved);
 	    return "redirect:/home";
 	    
 	  }
