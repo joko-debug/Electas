@@ -1,4 +1,4 @@
-package com.electas.domain;
+package com.electas.sercurity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.springframework.security.core.GrantedAuthority;
+
+import com.electas.domain.User;
 
 @Entity
 public class Authority implements GrantedAuthority {
@@ -42,11 +44,6 @@ public class Authority implements GrantedAuthority {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	@Override
-	public String toString() {
-		return "Authority [id=" + id + ", authority=" + authority + ", user=" + user + "]";
 	}
 
 	
