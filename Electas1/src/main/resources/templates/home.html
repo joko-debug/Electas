@@ -3,7 +3,111 @@
 
 <script th:replace="fragments/scripts_imports :: header_voter"></script>
 
-<body>
-<script th:replace="fragments/scripts_imports :: sources"></script>
+<body class="m-0 h-100 p-0" >
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" style=""></script>
+  <div class="row h-100" style="">
+    <div class="col-2 h-100 w-25 col-sm-2 col-md-3 pl-0 pr-0 bg-dark col-lg-3" style="	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(30, 0, 255));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+      <nav class="colavbar navbar-expand-mx h-100 w-100 navbar-dark my-0 mx-2 bg-primary text-light" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(30, 0, 255));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+        <div class="col ml-0" id="navbar12" style=""><img class="img-fluid d-block rounded-circle float-left pt-2" src="../../Pictures/electas.png" width="30" height="30"> <a class="navbar-brand d-none d-md-block" href="#" style="">
+            <b class="text-center">&nbsp; Electas</b>
+          </a>
+          <ul class="navbar-nav mn-auto">
+            <li class="nav-item font-weight-bold text-light"> <a class="nav-link" href="#">Home</a> </li>
+            <li class="nav-item text-white font-weight-bold"> <a class="nav-link" href="#">Election</a> </li>
+            <li class="nav-item text-white font-weight-bold"> <a class="nav-link" href="#">profile</a> </li>
+            <li class="nav-item text-white font-weight-bold"> <a class="nav-link" href="#">Help</a> </li>
+          </ul>
+          <div class="row p-0 pt-0 pb-0">
+          </div>
+          <div class="row h-25 pt-1 pb-5">
+          </div>
+          <div class="row p-5 pb-5 pt-5 h-25">
+          </div>
+          <div class="row p-5 pb-5 pt-5 h-25">
+          </div>
+          <div class="btn-group"> <a href="#" class="btn btn-primary">voter</a> <a href="#" class="btn btn-dark">candidate</a> <a href="#" class="btn btn-light">aministrator</a> </div><a class="btn text-light" href="#">login/logout</a>
+        </div>
+      </nav>
+    </div>
+    <div class="col-md-4 col-sm-5 col-5 col-lg-5 border-left border-primary m-0 overflow-auto" style="">
+      <div class="card">
+        <div class="card">
+          <div class="card-header"><b class="" style="">(unserName)&nbsp; HOME</b><br></div>
+          <div class="card-body p-0">
+            <h5 contenteditable="true">make a statement:</h5>
+            <form class="">
+              <div class="form-group"> <input type="text" class="form-control" placeholder="new statement"> </div> <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card pi-draggable">
+            <div class="card-body p-0 py-2" style="">
+              <div class="card-header p-0 pl-2 bg-secondary">generic guy</div>
+              <p>this is empty&nbsp; for now</p>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                <label class="form-check-label" for="exampleRadios1"> up </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                <label class="form-check-label" for="exampleRadios2"> down </label>
+              </div>
+            </div>
+          </div>
+          <div class="card pi-draggable">
+            <div class="card-body p-1 py-2" style="">
+              <div class="card-header p-0 pl-2 bg-secondary">generic guy</div>
+              <p>this is empty&nbsp; for now</p>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                <label class="form-check-label" for="exampleRadios1"> up </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                <label class="form-check-label" for="exampleRadios2"> down </label>
+              </div>
+            </div>
+          </div>
+          <div class="card pi-draggable">
+            <div class="card-body p-1 py-2" style="">
+              <div class="card-header p-0 pl-2 bg-secondary">generic guy</div>
+              <p>this is empty&nbsp; for now</p>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                <label class="form-check-label" for="exampleRadios1"> up </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                <label class="form-check-label" for="exampleRadios2"> down </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-5 col-5 m-0 p-0 col-lg-4 overflow-auto" style="">
+      <a class="btn btn-outline-primary" href="#">add election</a>
+      <div class="card bg-light rounded border-bottom p-0 mb-3 m-2">
+        <div class="card-header bg-light">electionForTheNextMbali</div>
+        <div class="card-body bg-light">
+          <a class="btn btn-outline-dark" href="#">view election&nbsp;</a>
+          <p class="card-text">desicription of the election here<br>start date: 02/04/2021<br>end date: 02/06/2022<br>admin name: gg</p>
+        </div>
+      </div>
+      <div class="card bg-light rounded border-bottom p-0 mb-3 m-2">
+        <div class="card-header bg-light">DJ after lockdown election</div>
+        <div class="card-body bg-light">
+          <a class="btn btn-outline-dark" href="#">view election&nbsp;</a>
+          <p class="card-text">desicription of the election here<br>start date: 02/05/2021<br>end date: 02/06/2022<br>admin name: gg</p>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous" style=""></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+    <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+  </div>
 </body>
 </html>
