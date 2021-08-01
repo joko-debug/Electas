@@ -36,12 +36,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	  protected void configure(HttpSecurity http) throws Exception {
 	    http
 	        .authorizeRequests()
-            .antMatchers("/","/css/**","/pictures/**","/home").permitAll()
+            .antMatchers("/","/css/**","/pictures/**","/nav","/nav/home").permitAll()
 	          .antMatchers("/landing_register").permitAll()
 	          .antMatchers("/admin/**").hasRole("ADMIN")
 	          .anyRequest().hasRole("USER").and()
 	        .formLogin().loginPage("/")
-	         .defaultSuccessUrl("/home")
+	         .defaultSuccessUrl("/nav/home")
 	          .and()
 	        .logout()
 	          .logoutUrl("/logout")

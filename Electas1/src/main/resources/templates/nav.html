@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<script th:replace="fragments/scripts_imports :: header_voter"></script>
+
+<body class="m-0 h-100 p-0">
+	<div class="row h-100">
+		<div
+			class="col-3 h-100 w-25 col-sm-3 col-md-3 pl-0 pr-0 bg-dark col-lg-3"
+			style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(30, 0, 255)); background-position: top left; background-size: 100%; background-repeat: repeat;">
+			<nav
+				class="colavbar navbar-expand-mx h-100 w-100 navbar-dark my-0 mx-2 bg-primary text-light"
+				style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(30, 0, 255)); background-position: top left; background-size: 100%; background-repeat: repeat;">
+				<div class="col ml-0" id="navbar12" style="">
+					<img class="img-fluid d-block rounded-circle float-left pt-2"
+						src="pictures/electas.png" width="30" height="30"> <a
+						class="navbar-brand d-none d-md-block" href="#" style=""> <b
+						class="text-center">&nbsp; Electas</b>
+					</a>
+					<ul class="navbar-nav mn-auto">
+						<li class="nav-item font-weight-bold text-light"><a
+							class="nav-link" href="#">Home</a></li>
+						<li class="nav-item text-white font-weight-bold"><a
+							class="nav-link" href="#">Election</a></li>
+						<li class="nav-item text-white font-weight-bold"><a
+							class="nav-link" href="#">profile</a></li>
+						<li class="nav-item text-white font-weight-bold"><a
+							class="nav-link" href="#">Help</a></li>
+					</ul>
+					<div class="row p-0 pt-0 pb-0"></div>
+					<div class="row h-25 pt-1 pb-5"></div>
+					<div class="row p-5 pb-5 pt-5 h-25"></div>
+					<div class="row p-5 pb-5 pt-5 h-25"></div>
+					<div class="btn-group">
+						<a href="#" class="btn btn-primary">voter</a> <a href="#"
+							class="btn btn-dark">candidate</a> <a href="#"
+							class="btn btn-light">aministrator</a>
+					</div>
+					<div>
+						<a class="btn text-light" href="#">logout</a>
+					</div>
+
+				</div>
+			</nav>
+		</div>
+
+
+		<div id="replace"
+			class="col-md-4 col-sm-4 col-4 col-lg-4 border-left border-primary m-0 overflow-auto">
+			Content goes here</div>
+	</div>
+
+	<script th:replace="fragments/scripts_imports :: sources"></script>
+	
+	
+	<script>
+	
+	$(window).on('load', function () {
+		  alert("Window Loaded.");
+		  
+		//call function when page is loaded
+          getContent();
+
+          //set on change listener
+
+          function getContent() {
+          	
+
+              //create url to request fragment
+              var url = "/nav/home";
+              //load fragment and replace content
+              $('#replace').load(url);
+          }
+		});
+	
+	
+            $(document).ready(function () {
+
+                //call function when page is loaded
+                getContent();
+
+                //set on change listener
+
+                function getContent() {
+                	
+
+                    //create url to request fragment
+                    var url = "/nav/home";
+                    //load fragment and replace content
+                    $('#replace').load(url);
+                }
+            })
+        </script>
+</body>
+</html>
