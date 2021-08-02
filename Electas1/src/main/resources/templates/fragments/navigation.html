@@ -4,35 +4,46 @@
 <body>
 
 	<div th:fragment="home">
-		<div class="card">
-			<div class="card">
-				<div class="card-header">
-					<b class="" style="">(unserName)&nbsp; HOME</b><br>
-				</div>
-				<div class="card-body">
-					<h4 contenteditable="true">make a statement:</h4>
-					<form class="">
-						<div class="form-group row">
-							<div class="col-12 col-sm-9 col-md-10">
-								<input type="text" class="form-control"
-									placeholder="new statement">
-							</div>
+		<!-- this is the home page here -->
+		<div class="row h-100">
+			<div class="col-6">
+				<!-- this is the text typing port -->
+				<div class="card">
+					<div class="card">
+						<div class="card-header">
+							<b class="" style="">&nbsp; HOME</b><br>
 						</div>
-						<button type="submit" class="btn btn-primary btn-sm">Submit</button>
-					</form>
+						<div class="card-body">
+							<form class="">
+								<div class="form-group row">
+									<div class="col-12 col-sm-9 col-md-10">
+										<input type="text" class="form-control"
+											placeholder="make a new statement">
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary btn-sm">Submit</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col"></div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col"></div>
-		</div>
 
+			<div class="col-4 overflow-auto" style="">
+				<a class="btn btn-outline-primary" href="#">add election</a>
+
+			</div>
+		</div>
 	</div>
 
 
 
-
-	<div th:fragment="gg">This is Content 2</div>
+	<div th:fragment="election">This is election</div>
+	<div th:fragment="profile">This is profile</div>
+	<div th:fragment="help">This is help</div>
+	
 
 </body>
 </html>

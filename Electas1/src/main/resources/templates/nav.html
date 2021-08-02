@@ -6,7 +6,7 @@
 <body class="m-0 h-100 p-0">
 	<div class="row h-100">
 		<div
-			class="col-3 h-100 w-25 col-sm-3 col-md-3 pl-0 pr-0 bg-dark col-lg-3"
+			class="col-3 h-100 w-25 col-sm-3 col-md-3 p-0 mr-1 bg-dark col-lg-3"
 			style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(30, 0, 255)); background-position: top left; background-size: 100%; background-repeat: repeat;">
 			<nav
 				class="colavbar navbar-expand-mx h-100 w-100 navbar-dark my-0 mx-2 bg-primary text-light"
@@ -19,13 +19,13 @@
 					</a>
 					<ul class="navbar-nav mn-auto">
 						<li class="nav-item font-weight-bold text-light"><a
-							class="nav-link" href="#">Home</a></li>
+							class="nav-link" id="home" href="#">Home</a></li>
 						<li class="nav-item text-white font-weight-bold"><a
-							class="nav-link" href="#">Election</a></li>
+							class="nav-link" id="election" href="#">Election</a></li>
 						<li class="nav-item text-white font-weight-bold"><a
-							class="nav-link" href="#">profile</a></li>
+							class="nav-link" id="profile" href="#">profile</a></li>
 						<li class="nav-item text-white font-weight-bold"><a
-							class="nav-link" href="#">Help</a></li>
+							class="nav-link" id="help" href="#">Help</a></li>
 					</ul>
 					<div class="row p-0 pt-0 pb-0"></div>
 					<div class="row h-25 pt-1 pb-5"></div>
@@ -36,8 +36,12 @@
 							class="btn btn-dark">candidate</a> <a href="#"
 							class="btn btn-light">aministrator</a>
 					</div>
-					<div>
-						<a class="btn text-light" href="#">logout</a>
+					<div sec:authorize="isAuthenticated()" class="float-bottom pt-4 pl-1">
+						<form action="/logout" method="post" class="float-left">
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}" />
+							<button type="submit" class="btn btn-secondary">Logout</button>
+						</form>
 					</div>
 
 				</div>
@@ -46,50 +50,48 @@
 
 
 		<div id="replace"
-			class="col-md-4 col-sm-4 col-4 col-lg-4 border-left border-primary m-0 overflow-auto">
+			class="col-md-8 col-sm-8 col-8 col-lg-8 border-left border-primary m-0 overflow-auto">
 			Content goes here</div>
 	</div>
 
 	<script th:replace="fragments/scripts_imports :: sources"></script>
-	
-	
+
+
 	<script>
-	
-	$(window).on('load', function () {
-		  alert("Window Loaded.");
-		  
-		//call function when page is loaded
-          getContent();
+		$(window).on('load', function() {
+			alert("Window Loaded.");
 
-          //set on change listener
+			//call function when page is loaded
+			getContent();
 
-          function getContent() {
-          	
+			//set on change listener
 
-              //create url to request fragment
-              var url = "/nav/home";
-              //load fragment and replace content
-              $('#replace').load(url);
-          }
+			function getContent() {
+
+				//create url to request fragment
+				//load fragment and replace content
+				$('#replace').load("/nav/home");
+			}
+
+			//navigation press events
+			$('#home').click(function() {
+				$('#replace').load("/nav/home");
+			});
+
+			$('#election').click(function() {
+				$('#replace').load("/nav/election");
+			});
+
+			$('#profile').click(function() {
+				$('#replace').load("/nav/profile");
+			});
+
+			$('#help').click(function() {
+				$('#replace').load("/nav/help");
+			});
+
 		});
-	
-	
-            $(document).ready(function () {
+	</script>
 
-                //call function when page is loaded
-                getContent();
-
-                //set on change listener
-
-                function getContent() {
-                	
-
-                    //create url to request fragment
-                    var url = "/nav/home";
-                    //load fragment and replace content
-                    $('#replace').load(url);
-                }
-            })
-        </script>
 </body>
 </html>
