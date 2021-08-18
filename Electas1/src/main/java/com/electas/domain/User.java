@@ -38,8 +38,8 @@ public class User {
 	private String lastName;
 	
 	@NotEmpty
-	@Email(message = "invalid email adress")
-	private String username;//is a email adress
+	@Email(message = "invalid email address")
+	private String username;//is a email address
 	private String inAs;//to specify what type user they are currently in as;
 	private String description;
 	

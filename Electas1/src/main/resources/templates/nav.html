@@ -19,13 +19,13 @@
 					</a>
 					<ul class="navbar-nav mn-auto">
 						<li class="nav-item font-weight-bold text-light"><a
-							class="nav-link" id="home" href="#">Home</a></li>
+							class="nav-link" href="#" onclick="home()">Home</a></li>
 						<li class="nav-item text-white font-weight-bold"><a
-							class="nav-link" id="election" href="#">Election</a></li>
+							class="nav-link" href="#"  onclick="election()">Election</a></li>
 						<li class="nav-item text-white font-weight-bold"><a
-							class="nav-link" id="profile" href="#">profile</a></li>
+							class="nav-link" href="#" onclick="profile()">profile</a></li>
 						<li class="nav-item text-white font-weight-bold"><a
-							class="nav-link" id="help" href="#">Help</a></li>
+							class="nav-link" href="#" onclick="help()">Help</a></li>
 					</ul>
 					<div class="row p-0 pt-0 pb-0"></div>
 					<div class="row h-25 pt-1 pb-5"></div>
@@ -59,7 +59,6 @@
 
 	<script>
 		$(window).on('load', function() {
-			alert("Window Loaded.");
 
 			//call function when page is loaded
 			getContent();
@@ -72,25 +71,23 @@
 				//load fragment and replace content
 				$('#replace').load("/nav/home");
 			}
-
-			//navigation press events
-			$('#home').click(function() {
-				$('#replace').load("/nav/home");
-			});
-
-			$('#election').click(function() {
-				$('#replace').load("/nav/election");
-			});
-
-			$('#profile').click(function() {
-				$('#replace').load("/nav/profile");
-			});
-
-			$('#help').click(function() {
-				$('#replace').load("/nav/help");
-			});
-
 		});
+		
+		function home() {
+			$('#replace').load("/nav/home");
+		}
+		
+		function election() {
+			$('#replace').load("/nav/election");
+		}
+		
+		function profile() {
+			$('#replace').load("/nav/profile");
+		}
+		
+		function help() {
+			$('#replace').load("/nav/help");
+		}
 	</script>
 
 </body>

@@ -41,9 +41,77 @@
 
 
 	<div th:fragment="election">This is election</div>
-	<div th:fragment="profile">This is profile</div>
+
+
+	<div th:fragment="profile">
+		<div class="mx-auto col-lg-6 col-10">
+			<h1>Edit Profile</h1>
+
+			<form class="text-left" method="post" action="/profileChange">
+				<input type="hidden" th:name="${_csrf.parameterName}"
+					th:value="${_csrf.token}" />
+				<div class="form-group">
+					<label>description</label><input type="text" class="form-control"
+						id="form16" th:field="*{user.description}"
+						th:placeholder="${user.description}">
+				</div>
+				<div class="form-group">
+					<label for="form16">firstName</label> <input type="text"
+						class="form-control" id="form16"
+						th:placeholder="${user.firstName}" th:field="*{user.firstName}">
+				</div>
+				<div class="form-group">
+					<label for="form16">lastName</label> <input type="text"
+						class="form-control" id="form16"
+						th:placeholder="${user.firstName}" th:field="${user.lastName}">
+				</div>
+				<label for="form18">Your current roles: </label>
+				<tr th:each="authorit : ${user.authorities}">
+					<td th:text="${authorit.authority}">&nbsp;</td>
+
+				</tr>
+				<div class="form-group">
+
+					<label for="form18" class="pr-5">New User Roles</label>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="vote"
+							value="true" th:checked="checked" disabled> <label
+							class="form-check-label" for="inlineCheckbox1">Voter</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="candi"
+							value="option2" th:field="*{ar.c}"> <label
+							class="form-check-label" for="inlineCheckbox2">Candidate</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="admin"
+							value="option3" th:field="${ar.a}"> <label
+							class="form-check-label" for="inlineCheckbox3">Administrators</label>
+					</div>
+				</div>
+
+
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="form19">New Password</label> <input type="password"
+							class="form-control" id="password" th:field="*{user.password}">
+					</div>
+				</div>
+
+				<button type="submit" name="update" value="Update"
+					class="btn mr-5 btn-dark">update</button>
+				<!-- 				<button type="submit" name = "nuke" value="Nuke"class="btn ml-5 btn-danger">nuke -->
+				<!-- 					account</button> -->
+
+			</form>
+
+		</div>
+	</div>
+
+
 	<div th:fragment="help">This is help</div>
-	
+
 
 </body>
 </html>
