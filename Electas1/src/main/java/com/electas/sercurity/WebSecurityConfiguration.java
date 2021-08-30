@@ -38,7 +38,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	        .authorizeRequests()
             .antMatchers("/","/css/**","/pictures/**").permitAll()
 	          .antMatchers("/landing_register").permitAll()
-	          .antMatchers("/nav/**","/profileChange").hasRole("VOTER")
+	          .antMatchers("/nav/**","/inAs/**","/profileChange").hasRole("VOTER")
 	          .anyRequest().hasRole("USER").and()
 	        .formLogin().loginPage("/")
 	         .defaultSuccessUrl("/nav")
