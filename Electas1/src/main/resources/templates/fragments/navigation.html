@@ -63,7 +63,7 @@
 				<div class="form-group">
 					<label for="form16">lastName</label> <input type="text"
 						class="form-control" id="form16"
-						th:placeholder="${user.firstName}" th:field="${user.lastName}">
+						th:placeholder="${user.lastName}" th:field="${user.lastName}">
 				</div>
 				<label for="form18">Your current roles: </label>
 				<tr th:each="authorit : ${user.authorities}">

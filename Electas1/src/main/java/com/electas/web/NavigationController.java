@@ -1,11 +1,14 @@
 package com.electas.web;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.electas.domain.AvailableRole;
 import com.electas.domain.User;
 import com.electas.service.UserService;
@@ -14,38 +17,45 @@ import com.electas.service.UserService;
 public class NavigationController {
 	@Autowired
 	UserService userService;
-	
+
 	@GetMapping("/nav")
-	public String homeView(@AuthenticationPrincipal User user, ModelMap model) {
+	public String homeView(@AuthenticationPrincipal User auser, ModelMap model) {
+		User user = userService.getUser(auser);
+		model.addAttribute("mainUser", user);
+		System.out.println(user.getInAs());
 		return "nav";
 	}
 
+	// different pages
 	@GetMapping("/nav/home")
 	public String navhome() {
-		// ModelAndView mv= new ModelAndView("search::search_list");
 		return "fragments/navigation::home";
 	}
 
 	@GetMapping("/nav/election")
 	public String navelection() {
-		// ModelAndView mv= new ModelAndView("search::search_list");
 		return "fragments/navigation::election";
 	}
 
 	@GetMapping("/nav/profile")
 	public String navprofile(@AuthenticationPrincipal User user, ModelMap model) {
-		
+
 		model.addAttribute("user", userService.getUser(user));
 		AvailableRole ar = new AvailableRole(false, false);
-		model.addAttribute("ar",ar);
+		model.addAttribute("ar", ar);
 		return "fragments/navigation::profile";
 	}
 
 	@GetMapping("/nav/help")
 	public String navhelp() {
-		// ModelAndView mv= new ModelAndView("search::search_list");
 		return "fragments/navigation::help";
 	}
 
+	// changes in as Value
+	@RequestMapping(method = RequestMethod.GET, path = "/inAs/{inas}")
+	public String navhome(@PathVariable("inas") String inas,@AuthenticationPrincipal User user) {
+		userService.changeInAs(inas,user);
+		return "redirect:/nav";
+	}
 
 }
