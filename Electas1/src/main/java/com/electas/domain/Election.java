@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Election {
@@ -20,10 +22,16 @@ public class Election {
 	
 	private Long id;
 	private User admin;
+	@NotEmpty(message = "please enter")
+	private String name;
+	@NotEmpty(message = "please enter")
 	private String description;
+//	@NotEmpty(message = "please enter")
+//	@Min(1)
 	private Integer winnerCount;
 	private Date startDate;
 	private Date endDate;
+	private Set<Candidate> candidates = new HashSet<>();
 	private Set<Sment> sment = new HashSet<>();
 	
 	
@@ -95,6 +103,28 @@ public class Election {
 	public void setSment(Set<Sment> sment) {
 		this.sment = sment;
 	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 	
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<Candidate> getCandidates() {
+		return candidates;
+	}
+
+	public void setCandidates(Set<Candidate> candidates) {
+		this.candidates = candidates;
+	}
 	
 }

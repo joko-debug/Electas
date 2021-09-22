@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<body>
+	<!-- admins fragment -->
+	<div th:fragment="new election admin">new election</div>
+	
+	<div th:fragment="voterfrag">voter fragment</div>
+	
+	<div th:fragment="cadidatefrag">candidate fragment</div>
+	
+	<div th:fragment="adminsfrag">admin fragment</div>
+	
+	
+		
+<!-- 	<div th:fragment="adminsfrag"> -->
+<!-- 		<div class="row h-100"> -->
+<!-- 			<div class=" col-8 h-100" style=""> -->
+<!-- 				<div class="card"> -->
+<!-- 					<div class="card-header">election Name</div> -->
+<!-- 					<div class="card-body"> -->
+<!-- 						<p> -->
+<!-- 							description of election here<br>start date&nbsp;<br>end -->
+<!-- 							date<br>admin Name<br> -->
+<!-- 						</p> -->
+<!-- 						<p> -->
+<!-- 							number of voters:()<br>number of candidates:()<br> -->
+<!-- 						</p> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class=""> -->
+<!-- 					<div class="list-group mb-3"> -->
+<!-- 						<a href="#" -->
+<!-- 							class="list-group-item list-group-item-action active text-dark">candidate -->
+<!-- 							ranking</a> <a href="#" -->
+<!-- 							class="list-group-item list-group-item-action">1: gg</a> <a -->
+<!-- 							href="#" class="list-group-item list-group-item-action">2:Morbi -->
+<!-- 							leo risus</a> <a href="#" -->
+<!-- 							class="list-group-item list-group-item-action">3:Porta ac -->
+<!-- 							consectetur ac</a> <a href="#" -->
+<!-- 							class="list-group-item list-group-item-action">4:Umshove</a> -->
+<!-- 					</div> -->
+<!-- 					<div class="list-group mb-3"> -->
+<!-- 						<a href="#" -->
+<!-- 							class="list-group-item list-group-item-action active text-dark">all -->
+<!-- 							candidates &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
+<!-- 							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
+<!-- 							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
+<!-- 							&nbsp; &nbsp;</a><a class="btn btn-light btn-sm active" href="#" -->
+<!-- 							style="">add candidate</a> <a href="#" -->
+<!-- 							class="list-group-item list-group-item-action">1: gg</a> <a -->
+<!-- 							href="#" class="list-group-item list-group-item-action">2:Morbi -->
+<!-- 							leo risus</a> <a href="#" -->
+<!-- 							class="list-group-item list-group-item-action">3:Porta ac -->
+<!-- 							consectetur ac</a> <a href="#" -->
+<!-- 							class="list-group-item list-group-item-action">4:Umshove</a> -->
+<!-- 					</div> -->
+<!-- 					<div class="row"> -->
+<!-- 						<div class="col-lg-9 col-md-9 col-sm-9 col-9 m-0 mx-5" style=""> -->
+<!-- 							<div class="card"> -->
+<!-- 								<div class="card"> -->
+<!-- 									<div class="card-header"> -->
+<!-- 										<b class="" style="">election for zolo&nbsp;</b><br> -->
+<!-- 									</div> -->
+<!-- 									<div class="card-body p-0"> -->
+<!-- 										<h5 contenteditable="true">make a statement:</h5> -->
+<!-- 										<form class=""> -->
+<!-- 											<div class="form-group"> -->
+<!-- 												<input type="text" class="form-control" -->
+<!-- 													placeholder="new statement"> -->
+<!-- 											</div> -->
+<!-- 											<button type="submit" class="btn btn-primary btn-sm">Submit</button> -->
+<!-- 										</form> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="row"> -->
+<!-- 								<div class="col"> -->
+<!-- 									<div class="card pi-draggable"> -->
+<!-- 										<div class="card-body p-0 py-2" style=""> -->
+<!-- 											<div class="card-header p-0 pl-2 bg-secondary">generic -->
+<!-- 												guy</div> -->
+<!-- 											<p>this is empty&nbsp; for now</p> -->
+<!-- 											<div class="form-check form-check-inline"> -->
+<!-- 												<input class="form-check-input" type="radio" -->
+<!-- 													name="exampleRadios" id="exampleRadios1" value="option1"> -->
+<!-- 												<label class="form-check-label" for="exampleRadios1"> -->
+<!-- 													up </label> -->
+<!-- 											</div> -->
+<!-- 											<div class="form-check form-check-inline"> -->
+<!-- 												<input class="form-check-input" type="radio" -->
+<!-- 													name="exampleRadios" id="exampleRadios2" value="option2"> -->
+<!-- 												<label class="form-check-label" for="exampleRadios2"> -->
+<!-- 													down </label> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<div class="card pi-draggable"> -->
+<!-- 										<div class="card-body p-1 py-2" style=""> -->
+<!-- 											<div class="card-header p-0 pl-2 bg-secondary">generic -->
+<!-- 												guy</div> -->
+<!-- 											<p>this is empty&nbsp; for now</p> -->
+<!-- 											<div class="form-check form-check-inline"> -->
+<!-- 												<input class="form-check-input" type="radio" -->
+<!-- 													name="exampleRadios" id="exampleRadios1" value="option1"> -->
+<!-- 												<label class="form-check-label" for="exampleRadios1"> -->
+<!-- 													up </label> -->
+<!-- 											</div> -->
+<!-- 											<div class="form-check form-check-inline"> -->
+<!-- 												<input class="form-check-input" type="radio" -->
+<!-- 													name="exampleRadios" id="exampleRadios2" value="option2"> -->
+<!-- 												<label class="form-check-label" for="exampleRadios2"> -->
+<!-- 													down </label> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<div class="card pi-draggable"> -->
+<!-- 										<div class="card-body p-1 py-2" style=""> -->
+<!-- 											<div class="card-header p-0 pl-2 bg-secondary">generic -->
+<!-- 												guy</div> -->
+<!-- 											<p>this is empty&nbsp; for now</p> -->
+<!-- 											<div class="form-check form-check-inline"> -->
+<!-- 												<input class="form-check-input" type="radio" -->
+<!-- 													name="exampleRadios" id="exampleRadios1" value="option1"> -->
+<!-- 												<label class="form-check-label" for="exampleRadios1"> -->
+<!-- 													up </label> -->
+<!-- 											</div> -->
+<!-- 											<div class="form-check form-check-inline"> -->
+<!-- 												<input class="form-check-input" type="radio" -->
+<!-- 													name="exampleRadios" id="exampleRadios2" value="option2"> -->
+<!-- 												<label class="form-check-label" for="exampleRadios2"> -->
+<!-- 													down </label> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="row p-5 pb-5 pt-5 h-25"></div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+	</div>
+</body>
+</html>

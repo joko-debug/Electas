@@ -1,5 +1,8 @@
 package com.electas.web;
 
+
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -10,30 +13,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.electas.domain.AvailableRole;
+import com.electas.domain.Election;
 import com.electas.domain.User;
+import com.electas.service.ElectionService;
 import com.electas.service.UserService;
 
 @Controller
 public class NavigationController {
 	@Autowired
 	UserService userService;
+	@Autowired
+	ElectionService electionService;
 
 	@GetMapping("/nav")
 	public String homeView(@AuthenticationPrincipal User auser, ModelMap model) {
 		User user = userService.getUser(auser);
+		user.setPassword("");
 		model.addAttribute("mainUser", user);
-		System.out.println(user.getInAs());
+		model.put("election", new Election());
 		return "nav";
 	}
 
 	// different pages
 	@GetMapping("/nav/home")
-	public String navhome() {
+	public String navhome(@AuthenticationPrincipal User user, ModelMap model) {
+		Set<Election> elections =electionService.getElections(user);
+		model.put("elections",elections);
 		return "fragments/navigation::home";
 	}
 
 	@GetMapping("/nav/election")
-	public String navelection() {
+	public String navelection(@AuthenticationPrincipal User user, ModelMap model) {
+		Set<Election> elections =electionService.getElections(user);
+		model.put("elections",elections);
 		return "fragments/navigation::election";
 	}
 

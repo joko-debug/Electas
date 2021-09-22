@@ -6,7 +6,7 @@
 	<div th:fragment="home">
 		<!-- this is the home page here -->
 		<div class="row h-100">
-			<div class="col-6">
+			<div class="col-7" id="Data">
 				<!-- this is the text typing port -->
 				<div class="card">
 					<div class="card">
@@ -31,23 +31,58 @@
 				</div>
 			</div>
 
-			<div class="col-4 overflow-auto" style="">
-				<a class="btn btn-outline-primary" href="#">add election</a>
-
+			<div class="col-4" style="">
+				<a class="btn btn-outline-primary" href="#" onclick="getModal()">add
+					election</a>
+					
+				<div class="card bg-light rounded border-bottom col-12"
+					th:each="election : ${elections}">
+					<div class="card-header bg-light" th:text="${election.name}">electionForTheNextMbali</div>
+					<div class="card-body bg-light">
+						<i th:text="${election.description}"> </i>
+						<p class="card-text">
+							start date: <i th:text="${election.startDate}"></i> <br>end
+							date: <i th:text="${election.endDate}"></i> <br>number of
+							winners : <i th:text="${election.winnerCount}"></i>
+						</p>
+					</div>
+					<a class="btn btn-outline-dark" href="#" th:onclick="'javascript:viewData('+${election.id}+')'">view election&nbsp;</a>
+				</div>
 			</div>
 		</div>
 	</div>
 
 
 
+
 	<div th:fragment="election">
-		This is election
-		<td th:switch="${mainUser.inAs}"><span
-			th:case="'0'">NO COURSES YET!</span> <span th:case="'1'"
-			th:text="${teacher.courses[0]}"></span>
-			<div th:case="*">
-				
-			</div></td>
+		<div class="row">
+			<div id="Data" class="col-7">choose a election to view
+				Data</div>
+			<div class="col-4">
+				<div class="col-11">
+					<a class="btn btn-outline-primary" href="#" onclick="getModal()">add
+						election</a>
+
+
+					<div class="card bg-light rounded border-bottom col-12"
+						th:each="election : ${elections}">
+						<div class="card-header bg-light" th:text="${election.name}">electionForTheNextMbali</div>
+						<div class="card-body bg-light">
+							<i th:text="${election.description}"> </i>
+							<p class="card-text">
+								start date: <i th:text="${election.startDate}"></i> <br>end
+								date: <i th:text="${election.endDate}"></i> <br>number of
+								winners : <i th:text="${election.winnerCount}"></i><br>
+								election ID : <i th:text="${election.id}"></i>
+							</p>
+						</div>
+						<a class="btn btn-outline-dark" href="#" onclick="viewData()">view election&nbsp;</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
 	</div>
 
 
@@ -76,7 +111,6 @@
 				<label for="form18">Your current roles: </label>
 				<tr th:each="authorit : ${user.authorities}">
 					<td th:text="${authorit.authority}">&nbsp;</td>
-
 				</tr>
 				<div class="form-group">
 
