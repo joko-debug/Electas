@@ -3,144 +3,257 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body>
 	<!-- admins fragment -->
-	<div th:fragment="new election admin">new election</div>
+
+	<div th:fragment="voterfrag"><script th:replace="fragments/elections::electionData"></script>
+		<script th:replace="fragments/elections::allCandidates"></script>
+		<script th:replace="fragments/elections::resultOfElection"></script></div>
+
+	<div th:fragment="candidatefrag"><script th:replace="fragments/elections::electionData"></script>
+		<script th:replace="fragments/elections::allCandidates"></script>
+		<script th:replace="fragments/elections::resultOfElection"></script></div>
+
+	<div th:fragment="adminfrag">
+		<script th:replace="fragments/elections::electionData"></script>
+		<script th:replace="fragments/elections::allCandidates"></script>
+		<script th:replace="fragments/elections::resultOfElection"></script>
+	</div>
+
+
+	<div th:fragment="electionData">
+		<div class="card">
+			<div class="card-header" th:text="${election.name}">election
+				Name</div>
+			<div class="card-body">
+				<p class="card-text">
+					start date: <i th:text="${election.startDate}"></i> <br>end
+					date: <i th:text="${election.endDate}"></i> <br>number of
+					winners : <i th:text="${election.winnerCount}"></i><br>
+					election ID : <i th:text="${election.id}"></i><br> <br>
+					number of voters : <i th:text="${numB}"></i><br> number of
+					Candidates : <i th:text="${numC}"></i>
+				</p>
+			</div>
+		</div>
+	</div>
+
+
+	<div th:fragment="resultOfElection">
 	
-	<div th:fragment="voterfrag">voter fragment</div>
+	<div class="card mb-2">
+			<div class="card-header">Election results</div>
+			<div class="card-body">
+				<ul class="list-unstyled sortable">
+					<li>
+						<div class="card mb-1">
+							<div class="card-header p-2">
+								<div class="row form-inline">
+									<div class="col-sm-1">&nbsp;</div>
+									<div class="col-sm-4 font-weight-bold">Candidate id</div>
+									<div class="col-sm-2 font-weight-bold">Status</div>
+									<div class="col-sm-2 font-weight-bold">Approved</div>
+									<div class="col-sm-1 text-right">&nbsp;</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="sort">
+						<div class="card mb-1">
+							<div class="card-header p-2"th:each="candidate : ${results}">
+								<div class="row form-inline">
+									<div class="col-sm-1">
+										<i class="fas fa-bars handle"></i>
+									</div>
+									<div class="col-sm-4" th:text="${candidate.id}">Row 1 - Col 1</div>
+									<div class="col-sm-2"th:text="${candidate.status}"> </div>
+									<div class="col-sm-2" th:text="${candidate.aproved}">Col 4</div>
+									<div class="col-sm-1 text-right">
+										<i class="fas fa-chevron-down" style="cursor: pointer"
+											data-toggle="collapse" data-target="#row-1"
+											aria-expanded="false" aria-controls="row-1"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
 	
-	<div th:fragment="cadidatefrag">candidate fragment</div>
-	
-	<div th:fragment="adminsfrag">admin fragment</div>
-	
-	
-		
-<!-- 	<div th:fragment="adminsfrag"> -->
-<!-- 		<div class="row h-100"> -->
-<!-- 			<div class=" col-8 h-100" style=""> -->
-<!-- 				<div class="card"> -->
-<!-- 					<div class="card-header">election Name</div> -->
-<!-- 					<div class="card-body"> -->
-<!-- 						<p> -->
-<!-- 							description of election here<br>start date&nbsp;<br>end -->
-<!-- 							date<br>admin Name<br> -->
-<!-- 						</p> -->
-<!-- 						<p> -->
-<!-- 							number of voters:()<br>number of candidates:()<br> -->
-<!-- 						</p> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 				<div class=""> -->
-<!-- 					<div class="list-group mb-3"> -->
-<!-- 						<a href="#" -->
-<!-- 							class="list-group-item list-group-item-action active text-dark">candidate -->
-<!-- 							ranking</a> <a href="#" -->
-<!-- 							class="list-group-item list-group-item-action">1: gg</a> <a -->
-<!-- 							href="#" class="list-group-item list-group-item-action">2:Morbi -->
-<!-- 							leo risus</a> <a href="#" -->
-<!-- 							class="list-group-item list-group-item-action">3:Porta ac -->
-<!-- 							consectetur ac</a> <a href="#" -->
-<!-- 							class="list-group-item list-group-item-action">4:Umshove</a> -->
-<!-- 					</div> -->
-<!-- 					<div class="list-group mb-3"> -->
-<!-- 						<a href="#" -->
-<!-- 							class="list-group-item list-group-item-action active text-dark">all -->
-<!-- 							candidates &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
-<!-- 							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
-<!-- 							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
-<!-- 							&nbsp; &nbsp;</a><a class="btn btn-light btn-sm active" href="#" -->
-<!-- 							style="">add candidate</a> <a href="#" -->
-<!-- 							class="list-group-item list-group-item-action">1: gg</a> <a -->
-<!-- 							href="#" class="list-group-item list-group-item-action">2:Morbi -->
-<!-- 							leo risus</a> <a href="#" -->
-<!-- 							class="list-group-item list-group-item-action">3:Porta ac -->
-<!-- 							consectetur ac</a> <a href="#" -->
-<!-- 							class="list-group-item list-group-item-action">4:Umshove</a> -->
-<!-- 					</div> -->
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-lg-9 col-md-9 col-sm-9 col-9 m-0 mx-5" style=""> -->
-<!-- 							<div class="card"> -->
-<!-- 								<div class="card"> -->
-<!-- 									<div class="card-header"> -->
-<!-- 										<b class="" style="">election for zolo&nbsp;</b><br> -->
-<!-- 									</div> -->
-<!-- 									<div class="card-body p-0"> -->
-<!-- 										<h5 contenteditable="true">make a statement:</h5> -->
-<!-- 										<form class=""> -->
-<!-- 											<div class="form-group"> -->
-<!-- 												<input type="text" class="form-control" -->
-<!-- 													placeholder="new statement"> -->
-<!-- 											</div> -->
-<!-- 											<button type="submit" class="btn btn-primary btn-sm">Submit</button> -->
-<!-- 										</form> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="row"> -->
-<!-- 								<div class="col"> -->
-<!-- 									<div class="card pi-draggable"> -->
-<!-- 										<div class="card-body p-0 py-2" style=""> -->
-<!-- 											<div class="card-header p-0 pl-2 bg-secondary">generic -->
-<!-- 												guy</div> -->
-<!-- 											<p>this is empty&nbsp; for now</p> -->
-<!-- 											<div class="form-check form-check-inline"> -->
-<!-- 												<input class="form-check-input" type="radio" -->
-<!-- 													name="exampleRadios" id="exampleRadios1" value="option1"> -->
-<!-- 												<label class="form-check-label" for="exampleRadios1"> -->
-<!-- 													up </label> -->
-<!-- 											</div> -->
-<!-- 											<div class="form-check form-check-inline"> -->
-<!-- 												<input class="form-check-input" type="radio" -->
-<!-- 													name="exampleRadios" id="exampleRadios2" value="option2"> -->
-<!-- 												<label class="form-check-label" for="exampleRadios2"> -->
-<!-- 													down </label> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 									<div class="card pi-draggable"> -->
-<!-- 										<div class="card-body p-1 py-2" style=""> -->
-<!-- 											<div class="card-header p-0 pl-2 bg-secondary">generic -->
-<!-- 												guy</div> -->
-<!-- 											<p>this is empty&nbsp; for now</p> -->
-<!-- 											<div class="form-check form-check-inline"> -->
-<!-- 												<input class="form-check-input" type="radio" -->
-<!-- 													name="exampleRadios" id="exampleRadios1" value="option1"> -->
-<!-- 												<label class="form-check-label" for="exampleRadios1"> -->
-<!-- 													up </label> -->
-<!-- 											</div> -->
-<!-- 											<div class="form-check form-check-inline"> -->
-<!-- 												<input class="form-check-input" type="radio" -->
-<!-- 													name="exampleRadios" id="exampleRadios2" value="option2"> -->
-<!-- 												<label class="form-check-label" for="exampleRadios2"> -->
-<!-- 													down </label> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 									<div class="card pi-draggable"> -->
-<!-- 										<div class="card-body p-1 py-2" style=""> -->
-<!-- 											<div class="card-header p-0 pl-2 bg-secondary">generic -->
-<!-- 												guy</div> -->
-<!-- 											<p>this is empty&nbsp; for now</p> -->
-<!-- 											<div class="form-check form-check-inline"> -->
-<!-- 												<input class="form-check-input" type="radio" -->
-<!-- 													name="exampleRadios" id="exampleRadios1" value="option1"> -->
-<!-- 												<label class="form-check-label" for="exampleRadios1"> -->
-<!-- 													up </label> -->
-<!-- 											</div> -->
-<!-- 											<div class="form-check form-check-inline"> -->
-<!-- 												<input class="form-check-input" type="radio" -->
-<!-- 													name="exampleRadios" id="exampleRadios2" value="option2"> -->
-<!-- 												<label class="form-check-label" for="exampleRadios2"> -->
-<!-- 													down </label> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="row p-5 pb-5 pt-5 h-25"></div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
+	</div>
+
+
+	<div th:fragment="allCandidates">
+
+		<div class="card mb-2">
+			<div class="card-header">All Candidates</div>
+			<div class="card-body">
+				<ul class="list-unstyled sortable">
+					<li>
+						<div class="card mb-1">
+							<div class="card-header p-2">
+								<div class="row form-inline">
+									<div class="col-sm-1">&nbsp;</div>
+									<div class="col-sm-4 font-weight-bold">Candidate id</div>
+									<div class="col-sm-2 font-weight-bold"></div>
+									<div class="col-sm-2 font-weight-bold">Approved</div>
+									<div class="col-sm-1 text-right">&nbsp;</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="sort">
+						<div class="card mb-1">
+							<div class="card-header p-2"th:each="candidate : ${allCandidates}">
+								<div class="row form-inline">
+									<div class="col-sm-1">
+										<i class="fas fa-bars handle"></i>
+									</div>
+									<div class="col-sm-4" th:text="${candidate.id}">Row 1 - Col 1</div>
+									<div class="col-sm-2"></div>
+									<div class="col-sm-2" th:text="${candidate.aproved}">Col 4</div>
+									<div class="col-sm-1 text-right">
+										<i class="fas fa-chevron-down" style="cursor: pointer"
+											data-toggle="collapse" data-target="#row-1"
+											aria-expanded="false" aria-controls="row-1"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- 	<div th:fragment="adminsfrag"> -->
+	<!-- 		<div class="row h-100"> -->
+	<!-- 			<div class=" col-8 h-100" style=""> -->
+	<!-- 				<div class="card"> -->
+	<!-- 					<div class="card-header">election Name</div> -->
+	<!-- 					<div class="card-body"> -->
+	<!-- 						<p> -->
+	<!-- 							description of election here<br>start date&nbsp;<br>end -->
+	<!-- 							date<br>admin Name<br> -->
+	<!-- 						</p> -->
+	<!-- 						<p> -->
+	<!-- 							number of voters:()<br>number of candidates:()<br> -->
+	<!-- 						</p> -->
+	<!-- 					</div> -->
+	<!-- 				</div> -->
+	<!-- 				<div class=""> -->
+	<!-- 					<div class="list-group mb-3"> -->
+	<!-- 						<a href="#" -->
+	<!-- 							class="list-group-item list-group-item-action active text-dark">candidate -->
+	<!-- 							ranking</a> <a href="#" -->
+	<!-- 							class="list-group-item list-group-item-action">1: gg</a> <a -->
+	<!-- 							href="#" class="list-group-item list-group-item-action">2:Morbi -->
+	<!-- 							leo risus</a> <a href="#" -->
+	<!-- 							class="list-group-item list-group-item-action">3:Porta ac -->
+	<!-- 							consectetur ac</a> <a href="#" -->
+	<!-- 							class="list-group-item list-group-item-action">4:Umshove</a> -->
+	<!-- 					</div> -->
+	<!-- 					<div class="list-group mb-3"> -->
+	<!-- 						<a href="#" -->
+	<!-- 							class="list-group-item list-group-item-action active text-dark">all -->
+	<!-- 							candidates &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
+	<!-- 							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
+	<!-- 							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
+	<!-- 							&nbsp; &nbsp;</a><a class="btn btn-light btn-sm active" href="#" -->
+	<!-- 							style="">add candidate</a> <a href="#" -->
+	<!-- 							class="list-group-item list-group-item-action">1: gg</a> <a -->
+	<!-- 							href="#" class="list-group-item list-group-item-action">2:Morbi -->
+	<!-- 							leo risus</a> <a href="#" -->
+	<!-- 							class="list-group-item list-group-item-action">3:Porta ac -->
+	<!-- 							consectetur ac</a> <a href="#" -->
+	<!-- 							class="list-group-item list-group-item-action">4:Umshove</a> -->
+	<!-- 					</div> -->
+	<!-- 					<div class="row"> -->
+	<!-- 						<div class="col-lg-9 col-md-9 col-sm-9 col-9 m-0 mx-5" style=""> -->
+	<!-- 							<div class="card"> -->
+	<!-- 								<div class="card"> -->
+	<!-- 									<div class="card-header"> -->
+	<!-- 										<b class="" style="">election for zolo&nbsp;</b><br> -->
+	<!-- 									</div> -->
+	<!-- 									<div class="card-body p-0"> -->
+	<!-- 										<h5 contenteditable="true">make a statement:</h5> -->
+	<!-- 										<form class=""> -->
+	<!-- 											<div class="form-group"> -->
+	<!-- 												<input type="text" class="form-control" -->
+	<!-- 													placeholder="new statement"> -->
+	<!-- 											</div> -->
+	<!-- 											<button type="submit" class="btn btn-primary btn-sm">Submit</button> -->
+	<!-- 										</form> -->
+	<!-- 									</div> -->
+	<!-- 								</div> -->
+	<!-- 							</div> -->
+	<!-- 							<div class="row"> -->
+	<!-- 								<div class="col"> -->
+	<!-- 									<div class="card pi-draggable"> -->
+	<!-- 										<div class="card-body p-0 py-2" style=""> -->
+	<!-- 											<div class="card-header p-0 pl-2 bg-secondary">generic -->
+	<!-- 												guy</div> -->
+	<!-- 											<p>this is empty&nbsp; for now</p> -->
+	<!-- 											<div class="form-check form-check-inline"> -->
+	<!-- 												<input class="form-check-input" type="radio" -->
+	<!-- 													name="exampleRadios" id="exampleRadios1" value="option1"> -->
+	<!-- 												<label class="form-check-label" for="exampleRadios1"> -->
+	<!-- 													up </label> -->
+	<!-- 											</div> -->
+	<!-- 											<div class="form-check form-check-inline"> -->
+	<!-- 												<input class="form-check-input" type="radio" -->
+	<!-- 													name="exampleRadios" id="exampleRadios2" value="option2"> -->
+	<!-- 												<label class="form-check-label" for="exampleRadios2"> -->
+	<!-- 													down </label> -->
+	<!-- 											</div> -->
+	<!-- 										</div> -->
+	<!-- 									</div> -->
+	<!-- 									<div class="card pi-draggable"> -->
+	<!-- 										<div class="card-body p-1 py-2" style=""> -->
+	<!-- 											<div class="card-header p-0 pl-2 bg-secondary">generic -->
+	<!-- 												guy</div> -->
+	<!-- 											<p>this is empty&nbsp; for now</p> -->
+	<!-- 											<div class="form-check form-check-inline"> -->
+	<!-- 												<input class="form-check-input" type="radio" -->
+	<!-- 													name="exampleRadios" id="exampleRadios1" value="option1"> -->
+	<!-- 												<label class="form-check-label" for="exampleRadios1"> -->
+	<!-- 													up </label> -->
+	<!-- 											</div> -->
+	<!-- 											<div class="form-check form-check-inline"> -->
+	<!-- 												<input class="form-check-input" type="radio" -->
+	<!-- 													name="exampleRadios" id="exampleRadios2" value="option2"> -->
+	<!-- 												<label class="form-check-label" for="exampleRadios2"> -->
+	<!-- 													down </label> -->
+	<!-- 											</div> -->
+	<!-- 										</div> -->
+	<!-- 									</div> -->
+	<!-- 									<div class="card pi-draggable"> -->
+	<!-- 										<div class="card-body p-1 py-2" style=""> -->
+	<!-- 											<div class="card-header p-0 pl-2 bg-secondary">generic -->
+	<!-- 												guy</div> -->
+	<!-- 											<p>this is empty&nbsp; for now</p> -->
+	<!-- 											<div class="form-check form-check-inline"> -->
+	<!-- 												<input class="form-check-input" type="radio" -->
+	<!-- 													name="exampleRadios" id="exampleRadios1" value="option1"> -->
+	<!-- 												<label class="form-check-label" for="exampleRadios1"> -->
+	<!-- 													up </label> -->
+	<!-- 											</div> -->
+	<!-- 											<div class="form-check form-check-inline"> -->
+	<!-- 												<input class="form-check-input" type="radio" -->
+	<!-- 													name="exampleRadios" id="exampleRadios2" value="option2"> -->
+	<!-- 												<label class="form-check-label" for="exampleRadios2"> -->
+	<!-- 													down </label> -->
+	<!-- 											</div> -->
+	<!-- 										</div> -->
+	<!-- 									</div> -->
+	<!-- 								</div> -->
+	<!-- 							</div> -->
+	<!-- 						</div> -->
+	<!-- 					</div> -->
+	<!-- 					<div class="row p-5 pb-5 pt-5 h-25"></div> -->
+	<!-- 				</div> -->
+	<!-- 			</div> -->
+	<!-- 		</div> -->
 	</div>
 </body>
 </html>

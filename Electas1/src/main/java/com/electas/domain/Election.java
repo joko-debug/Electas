@@ -26,8 +26,7 @@ public class Election {
 	private String name;
 	@NotEmpty(message = "please enter")
 	private String description;
-//	@NotEmpty(message = "please enter")
-//	@Min(1)
+	@Min(1)
 	private Integer winnerCount;
 	private Date startDate;
 	private Date endDate;

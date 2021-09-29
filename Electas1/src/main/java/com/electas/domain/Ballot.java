@@ -24,7 +24,7 @@ public class Ballot {
 	private Election election;
 	private User user;
 	private boolean aproved;
-	private double  waight;
+	private double  waight=1;
 	private Set<Vote> votes = new HashSet<>();
 	
 	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)

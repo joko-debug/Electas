@@ -77,7 +77,7 @@
 								election ID : <i th:text="${election.id}"></i>
 							</p>
 						</div>
-						<a class="btn btn-outline-dark" href="#" onclick="viewData()">view election&nbsp;</a>
+						<a class="btn btn-outline-dark" href="#" th:onclick="'javascript:viewData('+${election.id}+')'">view election&nbsp;</a>
 					</div>
 
 				</div>

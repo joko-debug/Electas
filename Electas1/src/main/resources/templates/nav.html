@@ -96,27 +96,40 @@
 							<label for="usrname"><span class=""></span>Election Name</label>
 							<input type="text" class="form-control" id="usrname"
 								placeholder="Election Name" th:field="*{name}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
 						</div>
 						<div class="form-group">
 							<label for="psw"><span class=""></span>Description</label> <input
 								type="text" class="form-control" id="description"
 								placeholder="What is your election about?"
 								th:field="*{description}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('description')}"
+								th:errors="*{description}"></div>
 						</div>
 						<div class="form-group">
 							<label for="psw"><span class=""></span>Number of winners</label>
 							<input type="number" class="form-control" id="now"
 								placeholder="10" min="1" max="10000" th:field="*{winnerCount}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('winnerCount')}"
+								th:errors="*{winnerCount}"></div>
 						</div>
 						<div class="form-group">
 							<label for="psw"><span class=""></span>Start Date</label> <input
 								type="date" class="form-control" id="startdate"
 								th:field="*{startDate}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('startDate')}"
+								th:errors="*{startDate}"></div>
 						</div>
 						<div class="form-group">
 							<label for="psw"><span class=""></span>End Date</label> <input
-								type="date" class="form-control" id="startdate"
+								type="date" class="form-control" id="enddate"
 								th:field="*{endDate}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></div>
 						</div>
 						<button type="submit" class="btn btn-primary btn-block">
 							<span class=""></span> new Election
@@ -157,11 +170,15 @@
 							<label for="usrname"><span class=""></span>Election Name</label>
 							<input type="text" class="form-control"
 								placeholder="Election Name" th:field="*{name}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
 						</div>
 						<div class="form-group">
 							<label for="psw"><span class=""></span>Election Id</label> <input
-								type="number" class="form-control"
-								placeholder="0" th:field="*{id}">
+								type="number" class="form-control" placeholder="0"
+								th:field="*{id}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
 						</div>
 
 						<button type="submit" class="btn btn-primary btn-block">
@@ -178,9 +195,9 @@
 			</div>
 		</div>
 	</div>
-	
-	
-<!-- 	voter modal -->
+
+
+	<!-- 	voter modal -->
 	<div class="modal fade" id="voterModal" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -203,11 +220,15 @@
 							<label for="usrname"><span class=""></span>Election Name</label>
 							<input type="text" class="form-control"
 								placeholder="Election Name" th:field="*{name}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
 						</div>
 						<div class="form-group">
 							<label for="psw"><span class=""></span>election Id</label> <input
-								type="number" class="form-control"
-								placeholder="0" th:field="*{id}">
+								type="number" class="form-control" placeholder="0"
+								th:field="*{id}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
 						</div>
 
 						<button type="submit" class="btn btn-primary btn-block">
@@ -241,6 +262,21 @@
 				$('#replace').load("/nav/home");
 			}			
 		});
+		
+		(function($) {
+			$(".sortable").sortable({
+				containerSelector: "ul.sortable",
+				itemSelector: "li.sort",
+				handle: ".handle",
+				placeholder:
+					'<li><div class="card bg-primary text-white mb-1"><div class="card-header">Drop Here</div></div></li>',
+				distance: 0,
+				onDrop: function($item) {
+					$item.attr("style", null).removeClass("dragged");
+					$("body").removeClass("dragging");
+				}
+			});
+		})(jQuery);
 
 		function home() {
 			$('#replace').load("/nav/home");

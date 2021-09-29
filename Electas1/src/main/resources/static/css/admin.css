@@ -104,6 +104,19 @@ abbr[title], abbr[data-original-title] {
 	text-decoration-skip-ink: none;
 }
 
+body.dragging,
+body.dragging * {
+	cursor: grabbing !important;
+}
+.dragged {
+	position: absolute !important;
+	opacity: 0.6;
+	z-index: 2000;
+}
+.handle {
+	cursor: grab;
+}
+
 
 address {
 	margin-bottom: 1rem;
