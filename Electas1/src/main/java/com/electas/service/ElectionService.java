@@ -13,6 +13,7 @@ import com.electas.domain.Ballot;
 import com.electas.domain.Candidate;
 import com.electas.domain.Election;
 import com.electas.domain.User;
+import com.electas.domain.Vote;
 import com.electas.repositories.AuthorityRepository;
 import com.electas.repositories.BallotRepository;
 import com.electas.repositories.CandidateRepository;
@@ -37,23 +38,22 @@ public class ElectionService {
 
 	@Autowired
 	private BallotRepository ballotRepo;
-	
+
 	@Autowired
 	private VoteRepository voteRepo;
 	@Autowired
 	private STV stv;
-	
 
 	public Election createElection(User user, Election elec) {
 		user = userRepo.getById(user.getId());
 		Set<Authority> auth = authorityRepo.findByUser(user);
 		for (Authority authority : auth) {
 			Date date = new Date(System.currentTimeMillis());
-			if(date.compareTo(elec.getStartDate())<=0 && elec.getStartDate().compareTo(elec.getEndDate())<=0) {
-			if (authority.getAuthority().equals("ROLE_ADMINISTRATOR")) {
-				elec.setAdmin(user);
-				elec = electionRepo.save(elec);
-			}
+			if (date.compareTo(elec.getStartDate()) <= 0 && elec.getStartDate().compareTo(elec.getEndDate()) <= 0) {
+				if (authority.getAuthority().equals("ROLE_ADMINISTRATOR")) {
+					elec.setAdmin(user);
+					elec = electionRepo.save(elec);
+				}
 			}
 		}
 		return elec;
@@ -139,7 +139,7 @@ public class ElectionService {
 	}
 
 	public int getBallotCount(Election election) {
-		Set<Ballot> ballots= ballotRepo.findByElection(election);
+		Set<Ballot> ballots = ballotRepo.findByElection(election);
 		return ballots.size();
 	}
 
@@ -147,13 +147,94 @@ public class ElectionService {
 		Set<Candidate> candidates = candidateRepo.findByElection(election);
 		return candidates.size();
 	}
-	
-	public Set<Candidate> getRankedList(Election election){
+
+	public Set<Candidate> getRankedList(Election election) {
 		Long votes = voteRepo.count();
-		System.out.println("nulber of votes "+votes);
+		System.out.println("nulber of votes " + votes);
 		Set<Ballot> ballots = ballotRepo.findByElection(election);
 		Set<Candidate> candidates = candidateRepo.findByElection(election);
-		
-		return stv.getElectionResults(ballots,candidates,election);
+
+		return stv.getElectionResults(ballots, candidates, election);
 	}
+
+	public Election addVote(long candidateId, User user) {
+		Long cadidateId = candidateId;
+		Candidate c = candidateRepo.getById(cadidateId);
+		user = userRepo.getById(user.getId());
+		Election e = electionRepo.getById(c.getElection().getId());
+		Ballot b = ballotRepo.findDistinctByUserAndElection(user, e);
+		Vote v = voteRepo.findDistinctByBallotAndCandidate(b, c);
+		if (v != null) {
+			return e;
+		}
+		Set<Vote> votes = voteRepo.findByBallot(b);
+		int max = 0;
+		for (Vote vote : votes) {
+			if (vote.getPosition() > max) {
+				max = vote.getPosition();
+			}
+		}
+		v = new Vote();
+		v.setPosition(max + 1);
+		v.setBallot(b);
+		v.setCandidate(c);
+		voteRepo.save(v);
+		return e;
+	}
+
+	public Set<Vote> getVoterVotes(Election election, User user) {
+		Ballot b = ballotRepo.findDistinctByUserAndElection(user, election);
+		return voteRepo.findByBallot(b);
+	}
+
+	
+	
+	public Election removeVote(long voteId, User user) {
+		Vote vote = voteRepo.getById(voteId);
+		Ballot b = vote.getBallot();
+		voteRepo.deleteById(voteId);
+		Set<Vote> votes = voteRepo.findByBallot(b);
+		if (b.getUser().getId() == user.getId()) {
+
+			for (Vote vote2 : votes) {
+				if (vote2.getPosition() > vote.getPosition()) {
+					vote2.setPosition(vote2.getPosition() - 1);
+				}
+			}
+
+		}
+		voteRepo.saveAll(votes);
+		return b.getElection();
+		
+	}
+	
+	
+	
+
+	public Election moveVote(long voteId, User user, String move) {
+		Vote vote = voteRepo.getById(voteId);
+		Ballot b = vote.getBallot();
+		if (b.getUser().getId() == user.getId()) {
+			if(move.equals("up")) {
+				Vote vote2 = voteRepo.findDistinctByBallotAndPosition(b, vote.getPosition()-1);
+				if(vote2!=null) {
+					vote2.setPosition(vote.getPosition());
+					vote.setPosition(vote.getPosition()-1);
+					voteRepo.save(vote);
+					voteRepo.save(vote2);
+				}
+			}
+			else if(move.equals("down")) {
+				Vote vote2 = voteRepo.findDistinctByBallotAndPosition(b, vote.getPosition()+1);
+				if(vote2!=null) {
+					vote2.setPosition(vote.getPosition());
+					vote.setPosition(vote.getPosition()+1);
+					voteRepo.save(vote);
+					voteRepo.save(vote2);
+				}
+			}
+		}
+		return b.getElection();
+	}
+	
 }

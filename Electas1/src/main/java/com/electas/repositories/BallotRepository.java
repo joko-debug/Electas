@@ -15,4 +15,6 @@ public interface BallotRepository extends JpaRepository<Ballot, Long> {
 
 	Set<Ballot> findByElection(Election election);
 
+	Ballot findDistinctByUserAndElection(User user, Election election);
+
 }

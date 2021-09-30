@@ -13,6 +13,10 @@ $enable-print-styles:       true;
 //
 // Colors
 
+.scroll-y{
+overflow-y:auto;
+}
+
 $theme-colors: (
   primary: #ff3333,
   secondary: #6368ff,
@@ -40,5 +44,8 @@ $headings-font-weight: 200;
 $lead-font-size:   1.30rem;
 
 $spacer: 1.5rem;
-
-@import 'bootstrap-4.3.1';
+.anyClass {
+  height: 100vh;
+  overflow-y: auto;
+}
+@import 'bootstrap-5.0.2';

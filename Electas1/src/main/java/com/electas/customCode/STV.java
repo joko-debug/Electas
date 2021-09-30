@@ -35,9 +35,9 @@ public class STV {
 		if (candidates.isEmpty()) {
 			return null;
 		}
-		Long sumVotes= (long) 0;
+		Long sumVotes = (long) 0;
 		for (Ballot ballot : ballots) {
-			sumVotes +=voteRepo.findByBallot(ballot).size();
+			sumVotes += voteRepo.findByBallot(ballot).size();
 		}
 
 		initiateScore();
@@ -65,7 +65,7 @@ public class STV {
 					break;
 				}
 			}
-		} while (sumElected != election.getWinnerCount() && sumVotes>2);
+		} while (sumElected != election.getWinnerCount() && sumVotes > 2);
 		return candidates;
 	}
 
@@ -118,28 +118,30 @@ public class STV {
 
 	private void relocatedWinnerVotes(Candidate candidate) {
 		double excess = candidate.getScore() - quota;
-		for (Iterator iterator = ballots.iterator(); iterator.hasNext();) {
-			Ballot ballot = (Ballot) iterator.next();
-			Vote vote = voteRepo.findDistinctByBallotAndCandidate(ballot, candidate);
-			// if the top vote of the ballot is the candidate;
-			if (vote.getCandidate() == candidate) {
-				ballots.remove(ballot);
-				ballot.setWaight(ballot.getWaight() * (excess / candidate.getScore()));
-				ballots.add(ballot);
-				// get vote in next posistion on the ballot
-				int count = 1;
-				Vote vote1 = voteRepo.findDistinctByBallotAndPosition(ballot, vote.getPosition() + 1);
+		System.out.println("is ballot empty:" + ballots.isEmpty());
+		for (Ballot ballot : ballots) {
+			Set<Vote> votes = voteRepo.findByBallot(ballot);
+			for (Vote vote : votes) {
 
-				while (vote1.getCandidate().getStatus().equals("") != true) {
-					vote1 = voteRepo.findDistinctByBallotAndPosition(ballot, vote.getPosition() + count);
-					count++;
-				}
-				if (vote1.getCandidate() != null && vote1.getCandidate().getStatus().equals("")) {
-					// edit next vote of a ballot
-					candidate = vote1.getCandidate();
-					candidates.remove(candidate);
-					candidate.setScore(candidate.getScore() + ballot.getWaight());
-					candidates.add(candidate);
+				// if the top vote of the ballot is the candidate;
+				if (vote.getCandidate().getId() == candidate.getId()) {
+					ballot.setWaight(ballot.getWaight() * (excess / candidate.getScore()));
+					// get vote in next posistion on the ballot
+					int count = 1;
+					Vote vote1 = voteRepo.findDistinctByBallotAndPosition(ballot, vote.getPosition() + 1);
+					if (vote1 != null) {
+						while (vote1.getCandidate().getStatus().equals("") != true) {
+							vote1 = voteRepo.findDistinctByBallotAndPosition(ballot, vote.getPosition() + count);
+							count++;
+						}
+						if (vote1.getCandidate() != null && vote1.getCandidate().getStatus().equals("")) {
+							// edit next vote of a ballot
+							candidate = vote1.getCandidate();
+							candidates.remove(candidate);
+							candidate.setScore(candidate.getScore() + ballot.getWaight());
+							candidates.add(candidate);
+						}
+					}
 				}
 			}
 		}
