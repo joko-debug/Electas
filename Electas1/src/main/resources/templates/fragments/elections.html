@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<body>
+	<!-- admins fragment -->
+
+	<div th:fragment="voterfrag">
+		<script th:replace="fragments/elections::electionData"></script>
+		<script th:replace="fragments/elections::voterVotes"></script>
+		<script th:replace="fragments/elections::allCandidatesVoter"></script>
+		<script th:replace="fragments/elections::resultOfElection"></script>
+		<script th:replace="fragments/elections::discussion"></script>
+	</div>
+
+	<div th:fragment="candidatefrag">
+		<script th:replace="fragments/elections::electionData"></script>
+		<script th:replace="fragments/elections::allCandidates"></script>
+		<script th:replace="fragments/elections::resultOfElection"></script>
+		<script th:replace="fragments/elections::discussion"></script>
+	</div>
+
+	<div th:fragment="adminfrag">
+		<script th:replace="fragments/elections::electionData"></script>
+		<script th:replace="fragments/elections::allCandidates"></script>
+		<script th:replace="fragments/elections::resultOfElection"></script>
+		<script th:replace="fragments/elections::discussion"></script>
+	</div>
+
+
+	<div th:fragment="electionData">
+		<div class="card">
+			<div class="card-header" th:text="${election.name}">election
+				Name</div>
+			<div class="card-body">
+				<p class="card-text">
+					start date: <i th:text="${election.startDate}"></i> <br>end
+					date: <i th:text="${election.endDate}"></i> <br>number of
+					winners : <i th:text="${election.winnerCount}"></i><br>
+					election ID : <i th:text="${election.id}"></i><br> <br>
+					number of voters : <i th:text="${numB}"></i><br> number of
+					Candidates : <i th:text="${numC}"></i>
+				</p>
+			</div>
+		</div>
+	</div>
+
+
+	<div th:fragment="resultOfElection">
+
+		<div class="card mb-2">
+			<div class="card-header">Election results</div>
+			<div class="card-body">
+				<ul class="list-unstyled sortable">
+					<li>
+						<div class="card mb-1">
+							<div class="card-header p-2">
+								<div class="row form-inline">
+									<div class="col-sm-1">&nbsp;</div>
+									<div class="col-sm-4 font-weight-bold">Candidate name</div>
+									<div class="col-sm-2 font-weight-bold">Status</div>
+									<div class="col-sm-2 font-weight-bold">Approved</div>
+									<div class="col-sm-1 text-right">&nbsp;</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="sort">
+						<div class="card mb-1">
+							<div class="card-header p-2" th:each="candidate : ${results}">
+								<div class="row form-inline">
+									<div class="col-sm-1">
+										<i class="fas fa-bars handle"></i>
+									</div>
+									<div class="col-sm-4" th:text="${candidate.user.firstName}">Row
+										1 - Col 1</div>
+									<div class="col-sm-2" th:text="${candidate.status}"></div>
+									<div class="col-sm-2">
+										<div th:if="${candidate.aproved}">
+											<i class="material-icons"> verified </i>
+										</div>
+										<div th:unless="${candidate.aproved}">
+											<i class="material-icons"> cancel </i>
+										</div>
+									</div>
+									<div class="col-sm-1 text-right">
+										<i class="fas fa-chevron-down" style="cursor: pointer"
+											data-toggle="collapse" data-target="#row-1"
+											aria-expanded="false" aria-controls="row-1"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+
+
+	<div th:fragment="allCandidates">
+
+		<div class="card mb-2">
+			<div class="card-header">All Candidates</div>
+			<div class="card-body">
+				<ul class="list-unstyled sortable">
+					<li>
+						<div class="card mb-1">
+							<div class="card-header p-2">
+								<div class="row form-inline">
+									<div class="col-sm-1">&nbsp;</div>
+									<div class="col-sm-4 font-weight-bold">Candidate name</div>
+									<div class="col-sm-2 font-weight-bold"></div>
+									<div class="col-sm-2 font-weight-bold">Approved</div>
+									<div class="col-sm-1 text-right">&nbsp;</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="sort">
+						<div class="card mb-1">
+							<div class="card-header p-2"
+								th:each="candidate : ${allCandidates}">
+								<div class="row form-inline">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-4" th:text="${candidate.user.firstName}">Row
+										1 - Col 1</div>
+									<div class="col-sm-2"></div>
+									<div class="col-sm-2">
+										<div th:if="${candidate.aproved}">
+											<i class="material-icons"> verified </i>
+										</div>
+										<div th:unless="${candidate.aproved}">
+											<i class="material-icons"> cancel </i>
+										</div>
+									</div>
+									<div class="col-sm-1 text-right">
+										<i class="fas fa-chevron-down" style="cursor: pointer"
+											data-toggle="collapse" data-target="#row-1"
+											aria-expanded="false" aria-controls="row-1"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+	<div th:fragment="allCandidatesVoter">
+
+		<div class="card mb-2">
+			<div class="card-header">All Candidates</div>
+			<div class="card-body">
+				<ul class="list-unstyled sortable">
+					<li>
+						<div class="card mb-1">
+							<div class="card-header p-2">
+								<div class="row form-inline">
+									<div class="col-sm-1">&nbsp;</div>
+									<div class="col-sm-3 font-weight-bold">Candidate name</div>
+									<div class="col-sm-3 font-weight-bold">Approved</div>
+									<div class="col-sm-2 font-weight-bold">&nbsp;Add</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="sort">
+						<div class="card mb-1">
+							<div class="card-header p-2"
+								th:each="candidate : ${allCandidates}">
+								<div class="row form-inline">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-4" th:text="${candidate.user.firstName}">Row
+										1 - Col 1</div>
+									<div class="col-sm-2">
+										<div th:if="${candidate.aproved}">
+											<i class="material-icons"> verified </i>
+										</div>
+										<div th:unless="${candidate.aproved}">
+											<i class="material-icons"> cancel </i>
+										</div>
+									</div>
+									<div class="col-sm-1 text-right">
+										<span class="material-icons btn-primary"
+											th:onclick="'javascript:addVote('+${candidate.id}+')'">
+											add </span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+
+
+	<div th:fragment="voterVotes">
+
+		<div class="card mb-2">
+			<div class="card-header">Your Votes</div>
+			<div class="card-body">
+				<ul class="list-unstyled sortable">
+					<li>
+						<div class="card mb-1">
+							<div class="card-header p-2">
+								<div class="row form-inline">
+									<div class="col-sm-1">&nbsp;</div>
+									<div class="col-sm-3 font-weight-bold">Candidate id</div>
+									<div class="col-sm-3 font-weight-bold">Position</div>
+									<div class="col-sm-2 font-weight-bold">&nbsp;Add</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="sort">
+						<div class="card mb-1">
+							<div class="card-header p-2" th:each="vote : ${votes}">
+								<div class="row form-inline">
+									<div class="col-sm-1">
+										<span class="material-icons btn-primary"
+											th:onclick="'javascript:moveVoteUp('+${vote.id}+')'">
+											keyboard_arrow_up </span> <span class="material-icons btn-primary"
+											th:onclick="'javascript:moveVoteDown('+${vote.id}+')'">
+											expand_more </span>
+									</div>
+									<div class="col-sm-4"
+										th:text="${vote.candidate.user.firstName}">Row 1 - Col 1</div>
+									<div class="col-sm-2">
+										<div class="col-sm-4" th:text="${vote.position}">Row 1 -
+											Col 1</div>
+									</div>
+									<div class="col-sm-1 text-right">
+										<span class="material-icons btn-primary"
+											th:onclick="'javascript:removeVote('+${vote.id}+')'">
+											remove </span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+
+
+
+	<div th:fragment="discussion">
+		<div class="card">
+			<div class="card">
+				<div class="card-header">
+					<b class="" th:text="${election.name}">&nbsp; discussion</b><br>
+				</div>
+				<div class="card-body" >
+					<form role="form" method="post"
+						action="/sment/makeElectionSment">
+						<input type="hidden" th:name="${_csrf.parameterName}"
+							th:value="${_csrf.token}" />	
+							<input type="hidden" th:value="${election}" th:field="*{newSment.election}">
+						<div class="form-group row">
+							<div class="col-12 col-sm-9 col-md-10">
+								<input type="text" class="form-control"
+									placeholder="make a new statement" th:field="*{newSment.post}">
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary btn-sm">Submit</button>
+					</form>
+ 
+					<div class="card-body p-0 py-2" th:each="sment : ${sments}">
+						<div class="card-header p-0 pl-2 bg-secondary"
+							th:text="${sment.user.firstName}"></div>
+						<p th:text="${sment.post}"></p>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="exampleRadios"
+								id="exampleRadios1" value="option1"> <label
+								class="form-check-label" for="exampleRadios1"> up </label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="exampleRadios"
+								id="exampleRadios2" value="option2"> <label
+								class="form-check-label" for="exampleRadios2"> down </label>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

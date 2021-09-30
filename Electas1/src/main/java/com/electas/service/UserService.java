@@ -26,8 +26,12 @@ public class UserService {
 	// update user
 	public User update(User userIN, User change, AvailableRole ar) {
 		User user = userRepo.getById(userIN.getId());
+		//change description
+		if(change.getDescription().equals("")!= true && change.getDescription().equals(user.getDescription())!=true){
+			user.setDescription(change.getDescription());
+		}
+		
 		// change password
-		System.out.println(user.getPassword());
 		if (change.getPassword().equals("") != true) {
 			String encodedPassword = passwordEncoder.encode(change.getPassword());
 			user.setPassword(encodedPassword);
@@ -95,7 +99,7 @@ public class UserService {
 
 	public void changeInAs(String inas, User userIn) {
 		User user = userRepo.getById(userIn.getId());
-		System.out.println(user.getFirstName());
+		//System.out.println(user.getFirstName());
 		Set<Authority> a = authorityRepo.findByUser(user);
 		for(Authority auth : a) {
 			if (inas.equals(auth.getAuthority())) {

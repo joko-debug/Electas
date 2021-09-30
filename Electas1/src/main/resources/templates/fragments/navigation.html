@@ -6,7 +6,7 @@
 	<div th:fragment="home">
 		<!-- this is the home page here -->
 		<div class="row h-100">
-			<div class="col-6">
+			<div class="col-7 h-100 anyClass" id="Data">
 				<!-- this is the text typing port -->
 				<div class="card">
 					<div class="card">
@@ -14,15 +14,37 @@
 							<b class="" style="">&nbsp; HOME</b><br>
 						</div>
 						<div class="card-body">
-							<form class="">
+							<form role="form" method="post" th:object="${newSment}"
+								action="/sment/makeSment">
+								<input type="hidden" th:name="${_csrf.parameterName}"
+									th:value="${_csrf.token}" />
 								<div class="form-group row">
 									<div class="col-12 col-sm-9 col-md-10">
 										<input type="text" class="form-control"
-											placeholder="make a new statement">
+											placeholder="make a new statement" th:field="*{post}">
 									</div>
 								</div>
 								<button type="submit" class="btn btn-primary btn-sm">Submit</button>
 							</form>
+
+							<div class="card-body p-0 py-2" th:each="sment : ${sments}">
+								<div class="card-header p-0 pl-2 bg-secondary"
+									th:text="${sment.user.firstName}"></div>
+								<p th:text="${sment.post}"></p>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio"
+										name="exampleRadios" id="exampleRadios1" value="option1">
+									<label class="form-check-label" for="exampleRadios1">
+										up </label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio"
+										name="exampleRadios" id="exampleRadios2" value="option2">
+									<label class="form-check-label" for="exampleRadios2">
+										down </label>
+								</div>
+							</div>
+
 						</div>
 					</div>
 				</div>
@@ -31,23 +53,62 @@
 				</div>
 			</div>
 
-			<div class="col-4 overflow-auto" style="">
-				<a class="btn btn-outline-primary" href="#">add election</a>
+			<div class="col-4" style="">
+				<a class="btn btn-outline-primary" href="#" onclick="getModal()">add
+					election</a>
 
+				<div class="card bg-light rounded border-bottom col-12"
+					th:each="election : ${elections}">
+					<div class="card-header bg-light" th:text="${election.name}">electionForTheNextMbali</div>
+					<div class="card-body bg-light">
+						<i th:text="${election.description}"> </i>
+						<p class="card-text">
+							start date: <i th:text="${election.startDate}"></i> <br>end
+							date: <i th:text="${election.endDate}"></i> <br>number of
+							winners : <i th:text="${election.winnerCount}"></i>
+						</p>
+					</div>
+					<a class="btn btn-outline-dark" href="#"
+						th:onclick="'javascript:viewData('+${election.id}+')'">view
+						election&nbsp;</a>
+				</div>
 			</div>
 		</div>
 	</div>
 
 
 
+
 	<div th:fragment="election">
-		This is election
-		<td th:switch="${mainUser.inAs}"><span
-			th:case="'0'">NO COURSES YET!</span> <span th:case="'1'"
-			th:text="${teacher.courses[0]}"></span>
-			<div th:case="*">
-				
-			</div></td>
+		<div class="row">
+			<div id="Data" class="col-7 overflow-y">choose a election to
+				view Data</div>
+			<div class="col-4">
+				<div class="col-11">
+					<a class="btn btn-outline-primary" href="#" onclick="getModal()">add
+						election</a>
+
+
+					<div class="card bg-light rounded border-bottom col-12"
+						th:each="election : ${elections}">
+						<div class="card-header bg-light" th:text="${election.name}">electionForTheNextMbali</div>
+						<div class="card-body bg-light">
+							<i th:text="${election.description}"> </i>
+							<p class="card-text">
+								start date: <i th:text="${election.startDate}"></i> <br>end
+								date: <i th:text="${election.endDate}"></i> <br>number of
+								winners : <i th:text="${election.winnerCount}"></i><br>
+								election ID : <i th:text="${election.id}"></i>
+							</p>
+						</div>
+						<a class="btn btn-outline-dark" href="#"
+							th:onclick="'javascript:viewData('+${election.id}+')'">view
+							election&nbsp;</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
 	</div>
 
 
@@ -76,7 +137,6 @@
 				<label for="form18">Your current roles: </label>
 				<tr th:each="authorit : ${user.authorities}">
 					<td th:text="${authorit.authority}">&nbsp;</td>
-
 				</tr>
 				<div class="form-group">
 
@@ -118,8 +178,65 @@
 	</div>
 
 
-	<div th:fragment="help">This is help</div>
+	<div th:fragment="help">
+		<div class="row h-100">
+			<div class="col-7 h-100 anyClass" id="Data">
+				<!-- this is the text typing port -->
+				<div class="card">
+					<div class="card">
+						<div class="card-header">
+							<b class="" style="">&nbsp; ask a question</b><br>
+						</div>
+						<div class="card-body">
+							<form role="form" method="post" th:object="${newSment}"
+								action="/sment/makeHelpSment">
+								<input type="hidden" th:name="${_csrf.parameterName}"
+									th:value="${_csrf.token}" />
+								<div class="form-group row">
+									<div class="col-12 col-sm-9 col-md-10">
+										<input type="text" class="form-control"
+											placeholder="ask developers a question." th:field="*{post}">
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary btn-sm">Submit</button>
+							</form>
 
+							<div class="card-body p-0 py-2" th:each="sment : ${sments}">
+								<div class="card-header p-0 pl-2 bg-secondary"
+									th:text="${sment.user.firstName}"></div>
+								<p th:text="${sment.post}"></p>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio"
+										name="exampleRadios" id="exampleRadios1" value="option1">
+									<label class="form-check-label" for="exampleRadios1">
+										up </label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio"
+										name="exampleRadios" id="exampleRadios2" value="option2">
+									<label class="form-check-label" for="exampleRadios2">
+										down </label>
+								</div>
+							</div>
 
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col"></div>
+				</div>
+			</div>
+
+			<div class="col-4" style="">
+				<div class="card-header">tutorial videos</div>
+				<div class="card bg-light rounded border-bottom">
+					<div class="card-header bg-light">how to make an election</div>
+					<div class="card-body bg-light">
+						<a href="url" class="card-text">youtube link</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

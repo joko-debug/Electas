@@ -14,6 +14,15 @@ public class Vote {
 	private Candidate candidate;
 	private Integer position;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	@ManyToOne
 	public Ballot getBallot() {
 		return ballot;
@@ -35,15 +44,6 @@ public class Vote {
 	}
 	public void setPosition(int position) {
 		this.position = position;
-	}
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 	
 	

@@ -19,46 +19,6 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <annotation id="3" language="java" name="com.electas.custom_anotations.IdFormat" project="Electas1" 
-    file="/Electas1/src/main/java/com/electas/custom_anotations/IdFormat.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="124" width="240" x="166" y="275"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </annotation>  
-  <class id="4" language="java" name="com.electas.customCode.idFomatValidator" project="Electas1" 
-    file="/Electas1/src/main/java/com/electas/customCode/idFomatValidator.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="805" y="406"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="5" language="java" name="com.electas.repositories.UserRepository" project="Electas1" 
-    file="/Electas1/src/main/java/com/electas/repositories/UserRepository.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="96" width="204" x="361" y="490"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="6" language="java" name="com.electas.sercurity.Authority" project="Electas1" 
-    file="/Electas1/src/main/java/com/electas/sercurity/Authority.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1136" y="445"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <dependency id="7">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

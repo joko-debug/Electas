@@ -10,17 +10,18 @@
 	type="text/css">
 <link href="css/profileCss.css" rel="stylesheet" type="text/css"
 	id="theme">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 </head>
 
 <body class="m-0 h-100 p-0">
-	<div class="row h-100">
-		<div
-			class="col-3 h-100 w-25 col-sm-3 col-md-3 p-0 mr-1 bg-primary col-lg-3">
-<!-- 			style="background-image: linear-gradient(to bottom, rgba(primary), rgba(secondary)); background-position: top left; background-size: 100%; background-repeat: repeat;"> -->
+	<div class="row h-100 overflow-auto">
+		<div class="col-3 h-100 w-25 col-sm-3 col-md-3 p-0 mr-1 grad col-lg-3">
+			<!-- 			style="background-image: linear-gradient(to bottom, rgba(primary), rgba(secondary)); background-position: top left; background-size: 100%; background-repeat: repeat;"> -->
 			<nav
 				class="colavbar navbar-expand-mx h-100 w-100 navbar-dark my-0 mx-2 text-light">
-<!-- 				style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(30, 0, 255)); background-position: top left; background-size: 100%; background-repeat: repeat;"> -->
+				<!-- 				style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(30, 0, 255)); background-position: top left; background-size: 100%; background-repeat: repeat;"> -->
 				<div class="col ml-0" id="navbar12" style="">
 					<img class="img-fluid d-block rounded-circle float-left pt-2"
 						src="pictures/electas.png" width="30" height="30"> <a
@@ -53,7 +54,8 @@
 						<form action="/logout" method="post" class="float-left">
 							<input type="hidden" th:name="${_csrf.parameterName}"
 								th:value="${_csrf.token}" />
-							<button type="submit" class="btn text-dark border border-secondary">Logout</button>
+							<button type="submit"
+								class="btn text-dark border border-secondary">Logout</button>
 						</form>
 					</div>
 
@@ -63,13 +65,188 @@
 
 
 		<div id="replace"
-			class="col-md-8 col-sm-8 col-8 col-lg-8 border-left border-primary m-0 overflow-auto">
+			class="col-md-8 col-sm-8 col-8 col-lg-8 m-0 overflow-auto">
 			Content goes here</div>
+
+
 	</div>
 
 	<script th:replace="fragments/scripts_imports :: sources"></script>
 
 
+
+	<!-- admin make a new election -->
+	<div class="modal fade" id="adminModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header" style="padding: 25px 50px;">
+					<h4>Make a new election</h4>
+					<button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+
+				</div>
+				<div class="modal-body" style="padding: 20px 50px;">
+
+
+					<form role="form" method="post" th:object="${election}"
+						action="/makeElection">
+
+						<input type="hidden" th:name="${_csrf.parameterName}"
+							th:value="${_csrf.token}" />
+
+						<div class="form-group">
+							<label for="usrname"><span class=""></span>Election Name</label>
+							<input type="text" class="form-control" id="usrname"
+								placeholder="Election Name" th:field="*{name}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+						</div>
+						<div class="form-group">
+							<label for="psw"><span class=""></span>Description</label> <input
+								type="text" class="form-control" id="description"
+								placeholder="What is your election about?"
+								th:field="*{description}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('description')}"
+								th:errors="*{description}"></div>
+						</div>
+						<div class="form-group">
+							<label for="psw"><span class=""></span>Number of winners</label>
+							<input type="number" class="form-control" id="now"
+								placeholder="10" min="1" max="10000" th:field="*{winnerCount}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('winnerCount')}"
+								th:errors="*{winnerCount}"></div>
+						</div>
+						<div class="form-group">
+							<label for="psw"><span class=""></span>Start Date</label> <input
+								type="date" class="form-control" id="startdate"
+								th:field="*{startDate}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('startDate')}"
+								th:errors="*{startDate}"></div>
+						</div>
+						<div class="form-group">
+							<label for="psw"><span class=""></span>End Date</label> <input
+								type="date" class="form-control" id="enddate"
+								th:field="*{endDate}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></div>
+						</div>
+						<button type="submit" class="btn btn-primary btn-block">
+							<span class=""></span> new Election
+						</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-danger btn-default pull-left"
+						data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove"></span> Cancel
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 	candidate modal make new modal -->
+	<div class="modal fade" id="candidateModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header" style="padding: 25px 50px;">
+					<h4>run for election</h4>
+					<button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+
+				</div>
+				<div class="modal-body" style="padding: 20px 50px;">
+
+
+					<form role="form" method="post" th:object="${election}"
+						action="/makeCandidate">
+
+						<input type="hidden" th:name="${_csrf.parameterName}"
+							th:value="${_csrf.token}" />
+
+						<div class="form-group">
+							<label for="usrname"><span class=""></span>Election Name</label>
+							<input type="text" class="form-control"
+								placeholder="Election Name" th:field="*{name}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+						</div>
+						<div class="form-group">
+							<label for="psw"><span class=""></span>Election Id</label> <input
+								type="number" class="form-control" placeholder="0"
+								th:field="*{id}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+						</div>
+
+						<button type="submit" class="btn btn-primary btn-block">
+							<span class=""></span> become Candidate
+						</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-danger btn-default pull-left"
+						data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove"></span> Cancel
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 	voter modal -->
+	<div class="modal fade" id="voterModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header" style="padding: 25px 50px;">
+					<h4>create ballot</h4>
+					<button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+
+				</div>
+				<div class="modal-body" style="padding: 20px 50px;">
+
+
+					<form role="form" method="post" th:object="${election}"
+						action="/makeBallot">
+
+						<input type="hidden" th:name="${_csrf.parameterName}"
+							th:value="${_csrf.token}" />
+
+						<div class="form-group">
+							<label for="usrname"><span class=""></span>Election Name</label>
+							<input type="text" class="form-control"
+								placeholder="Election Name" th:field="*{name}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+						</div>
+						<div class="form-group">
+							<label for="psw"><span class=""></span>election Id</label> <input
+								type="number" class="form-control" placeholder="0"
+								th:field="*{id}">
+							<div class="alert alert-warning"
+								th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+						</div>
+
+						<button type="submit" class="btn btn-primary btn-block">
+							<span class=""></span> new Ballot
+						</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-danger btn-default pull-left"
+						data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove"></span> Cancel
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
@@ -82,14 +259,12 @@
 			//set on change listener
 
 			function getContent() {
-				//pick theme
-				
-
 				//create url to request fragment
 				//load fragment and replace content
 				$('#replace').load("/nav/home");
 			}			
 		});
+		
 
 		function home() {
 			$('#replace').load("/nav/home");
@@ -107,16 +282,48 @@
 			$('#replace').load("/nav/help");
 		}
 		
+		function viewData(g){
+			$('#Data').load("/viewElection/"+g);
+		}
+		function addVote(g){
+			$('#Data').load("/vote/addVote/"+g);
+		}
+		function removeVote(g){
+			$('#Data').load("/vote/removeVote/"+g);
+		}
 		
+		function moveVoteUp(g){
+			console.log("lello");
+			$('#Data').load("/vote/moveVote/"+g+"/up");
+		}
+		function removeVoteDown(g){
+			console.log("lello");
+			$('#Data').load("/vote/moveVote/"+g+"/down");
+		}
+		//adding modals
+		function getModal(){
+			var g = [[${mainUser.inAs}]];
+			 
+			if ( g === 'ROLE_VOTER') {
+				$("#voterModal").modal();
+				}
+		
+			else if ( g === 'ROLE_ADMINISTRATOR') {
+					$("#adminModal").modal();
+				}
+			else if ( g === 'ROLE_CANDIDATE') {
+				$("#candidateModal").modal();
+			}
+		}
 		
 	</script>
-<!-- 	loading style sheets -->
+	<!-- 	loading style sheets -->
 	<script th:inline="javascript">
 	window.onload = function() {
 		console.log('hello world');
 		
 		var g = [[${mainUser.inAs}]];
-		console.log('hello world');
+
 		if ( g === 'ROLE_VOTER') {
 			//console.log('hello voter');
 			document.getElementById('theme').href ="css/profileCss.css";
@@ -128,6 +335,7 @@
 			document.getElementById('theme').href = "css/candi.css";
 		}
 		};
+		
 	</script>
 </body>
 </html>

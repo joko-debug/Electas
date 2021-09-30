@@ -19,7 +19,7 @@
 	-gray: #6c757d; -
 	-gray-dark: #343a40; -
 	-primary: #FFD700; -
-	-secondary: #00FF00; -
+	-secondary: #25bf01; -
 	-success: #28a745; -
 	-info: #ccc; -
 	-warning: #ffc107; -
@@ -71,6 +71,10 @@ body {
 	background-color: white;
 }
 
+.grad {
+  background-image: linear-gradient(#ffd700,#25bf01);
+}
+
 [tabindex="-1"]:focus {
 	outline: 0 !important;
 }
@@ -99,6 +103,20 @@ abbr[title], abbr[data-original-title] {
 	border-bottom: 0;
 	text-decoration-skip-ink: none;
 }
+
+body.dragging,
+body.dragging * {
+	cursor: grabbing !important;
+}
+.dragged {
+	position: absolute !important;
+	opacity: 0.6;
+	z-index: 2000;
+}
+.handle {
+	cursor: grab;
+}
+
 
 address {
 	margin-bottom: 1rem;

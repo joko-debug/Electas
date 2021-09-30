@@ -42,8 +42,11 @@ $lead-font-size:   1.30rem;
 $spacer: 1.5rem;
 
 .anyClass {
-  height:685px;
-  overflow-y: scroll;
+  height:550px;
+  overflow-y: auto;
 }
 
-@import 'bootstrap-4.3.1';
+.scroll-y{
+overflow-y:auto;
+}
+@import 'bootstrap-5.0.2';
